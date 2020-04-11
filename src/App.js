@@ -1,34 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Header from './components/Header' 
 
 function App(){
-    /*
-     * Sem fragment, com um node (<div>) cobrindo os filhos
-    return (
-        <div>
-        <Header/>
-        </div>
-    )
-    */
+    const [projects, setProjects] = useState(['Desenvolvimento de app', 'Frontend web'])
 
-    // Com fragment
+    function handleAddProject(){ 
+        // projects.push(`Novo proj ${Date.now()}`)
+        // console.log(projects)
+        setProjects([...projects, `Novo proj ${Date.now()}`])
+    }
+
     return (
         <>
-        <Header title="ReactJS GoStack7">
+            <Header title="ReactJS GoStack11"/>
+
+            <button type="button" onClick={handleAddProject}>Add projeto</button>
+
             <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                {projects.map(project => <li key={project}>{project}</li>)}
             </ul>
-        </Header>
-        <Header title="ReactJS GoStack11">
-            <ul>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-            </ul>
-        </Header>
         </>
     )
 }
