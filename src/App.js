@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import api from './services/api'
 
 import './App.css'
-import background from './assets/background.jpg'
 
 import Header from './components/Header' 
 
 function App(){
-    const [projects, setProjects] = useState(['Desenvolvimento de app', 'Frontend web'])
+    const [projects, setProjects] = useState([])
+
+    useEffect(() => {
+        api.get('projects').then((response) => {
+            setProjects(response.data)
+        })
+    }, [])
 
     function handleAddProject(){ 
-        // projects.push(`Novo proj ${Date.now()}`)
-        // console.log(projects)
         setProjects([...projects, `Novo proj ${Date.now()}`])
     }
 
@@ -18,12 +22,10 @@ function App(){
         <>
             <Header title="ReactJS GoStack11"/>
 
-            <img width={300} src={background}/>
-
             <button type="button" onClick={handleAddProject}>Add projeto</button>
 
             <ul>
-                {projects.map(project => <li key={project}>{project}</li>)}
+                {projects.map(project => <li key={project.id}>{project.title}</li>)}
             </ul>
         </>
     )

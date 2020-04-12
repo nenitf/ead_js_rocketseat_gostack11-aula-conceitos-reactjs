@@ -6,3 +6,5 @@
 yarn
 yarn dev
 ```
+
+Também precisa do iniciar o [backend](http://github.com/nenitf/ead_js_rocketseat_gostack11-aula-conceitos-node)
